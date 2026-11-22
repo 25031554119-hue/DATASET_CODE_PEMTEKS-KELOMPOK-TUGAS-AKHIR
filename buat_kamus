@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv("abusive.csv")
+print("Nama kolom:", list(df.columns))
+
+kata = df.iloc[:, 0].dropna().astype(str).str.lower().str.strip()
+kata = kata[kata != ""].drop_duplicates()
+kata.to_csv("kamus_toxic.txt", index=False, header=False, encoding="utf-8")
+
+print("Jumlah kata di kamus:", len(kata))
+print(kata.head(10).tolist())
